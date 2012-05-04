@@ -16,5 +16,4 @@ Filter::Filter(QString f_name, QString v_file, QString f_file, QVector<QPair<QSt
         paramsSpinBox.append(pntr);
         layout()->addWidget(pntr);
     }
-
 }

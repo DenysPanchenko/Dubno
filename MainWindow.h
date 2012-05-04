@@ -15,6 +15,7 @@
 #include <QtGui/QMainWindow>
 #include <QAction>
 
+#include "FilterFactory.h"
 #include "scene.h"
 
 class MainWindow : public QMainWindow{
@@ -33,6 +34,8 @@ private:
     QAction* openImageAction;
     QMenu* editMenu;
     QMenu* helpMenu;
+
+    FilterFactory* filterFactory;
 public:
     MainWindow(QMainWindow* prnt = 0);
 

@@ -20,7 +20,12 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
 
     centralWidget = new Scene();
 
+    filterFactory = new FilterFactory();
+    filterFactory->fillFilterPool();
+
     toolBox = new QToolBox();
+    toolBox->addItem((QWidget*)filterFactory->getFilter(0),"First");
+
     dockWidgetPref = new QDockWidget();
     dockWidgetPref->setWidget(toolBox);
 
