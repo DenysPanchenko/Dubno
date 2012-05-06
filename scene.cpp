@@ -94,7 +94,7 @@ void Scene::openImage(){
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
     textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
     //updateGL();
-    changeFilter("nothingFilter.txt");
+    changeFilter("distortion1.txt");
 }
 
 void Scene::changeFilter(int pos){
@@ -108,6 +108,9 @@ void Scene::changeFilter(int pos){
     currentFilter->addShaderFromSourceFile(QGLShader::Fragment,filterData->getFragmentPath());
     currentFilter->link();
     currentFilter->bind();
+
+
+
     updateGL();
 }
 
