@@ -192,9 +192,18 @@ void MainWindow::openImage(){
 }
 
 void MainWindow::about(){
-    QMessageBox::about(this,"About Dubno","<img src=\"logo.png\"> <h1>Dubno</h1>ver. 1.0.0\n"
-                       "Authors: Panchenko Denys\n"
-                       "Grytsun Vladyslav");
+    QMessageBox::about(this,"About Dubno",
+                       "<table>"
+                       "<tr>"
+                       "<td>"
+                       "<img src=\"logo.png\" WIDTH=\"200\" align=\"left\">"
+                       "</td>"
+                       "<td>"
+                       "<h1>Dubno</h1>ver. 1.0.0<br>&copy; 05.2012. All rights reserved.<br><br>"
+                       "<font size=\"4\"><i>Authors</i>: Panchenko D., Grytsun V.</font>"
+                       "</td>"
+                       "</tr>"
+                       "</table>");
 }
 
 void MainWindow::help(){
