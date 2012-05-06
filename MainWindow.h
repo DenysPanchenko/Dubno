@@ -52,8 +52,8 @@ private slots:
     void openImage();
     void about();
     void help();
-    void previewCheck(bool);
-    void preferenceCheck(bool);
+    //void previewCheck(bool);
+    //void preferenceCheck(bool);
 
 public:
     MainWindow(QMainWindow* prnt = 0);

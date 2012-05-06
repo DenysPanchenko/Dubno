@@ -84,11 +84,6 @@ void MainWindow::setTitles(){
     helpMenu->setTitle("Help");
 }
 
-void MainWindow::previewCheck(bool b){
-    if(b)
-        dockWidgetPrev->setVisible(true);
-}
-
 void MainWindow::resizeMainWindow(QString image){
     QImage* curImage = new QImage(image);
     QSize size = curImage->size();
