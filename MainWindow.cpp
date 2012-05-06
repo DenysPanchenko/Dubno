@@ -23,7 +23,6 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
 
 
     centralWidget = new Scene(factory);
-    qDebug() << "PIZDA";
     toolBox = new QToolBox();
     //toolBox->addItem((QWidget*)factory->getFilter(0),"First");
     //toolBox->addItem((QWidget*)factory->getFilter(1),"Second");
