@@ -25,3 +25,18 @@ VERT_FILE:vertex_shader.txt;
 FRAG_FILE:toon1.txt;
 PARAMS:0;
 #
+FILTER_NAME:"Fish Eye" Effect;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:distortion.txt;
+PARAMS:0;
+#
+FILTER_NAME:Distortion;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:distortion1.txt;
+PARAMS:0;
+#
+FILTER_NAME:Clipping;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:clipping.txt;
+PARAMS:0;
+#
