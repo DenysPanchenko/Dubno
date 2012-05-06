@@ -4,6 +4,8 @@
 Scene::Scene(QWidget *parent): QGLWidget(parent)
 {
     setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
+    currentFilter = new QGLShaderProgram(this->context());
+    factory = new FilterFactory(QDir::currentPath() + QDir::separator() + "config.txt");
 }
 
 void Scene::initializeGL()
@@ -54,6 +56,8 @@ void Scene::draw()
 
     glBindTexture(GL_TEXTURE_2D,textname);
 
+#ifdef Q_WS_X11
+
     glBegin(GL_QUADS);
         glVertex3f(-1.0f, -1.0f,  0.0f);
         glTexCoord2f(1.0, 1.0);
@@ -65,6 +69,23 @@ void Scene::draw()
         glTexCoord2f(0.0, 1.0);
    glEnd();
 
+#endif
+
+#ifdef Q_WS_WIN
+
+   glBegin(GL_QUADS);
+       glVertex3f(-1.0f, -1.0f,  0.0f);
+       glTexCoord2f(1.0, 0.0);
+       glVertex3f( 1.0f, -1.0f,  0.0f);
+       glTexCoord2f(1.0, 1.0);
+       glVertex3f( 1.0f,  1.0f,  0.0f);
+       glTexCoord2f(0.0, 1.0);
+       glVertex3f(-1.0f,  1.0f,  0.0f);
+       glTexCoord2f(0.0, 0.0);
+  glEnd();
+
+#endif
+
 }
 
 void Scene::openImage(){
@@ -72,5 +93,32 @@ void Scene::openImage(){
                                              "/home",
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
     textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
+    //updateGL();
+    changeFilter("nothingFilter.txt");
+}
+
+void Scene::changeFilter(int pos){
+
+    Filter* filterData = factory->getFilter(pos);
+
+    delete currentFilter;
+    currentFilter = new QGLShaderProgram(this->context());
+
+    currentFilter->addShaderFromSourceFile(QGLShader::Vertex,filterData->getVertexPath());
+    currentFilter->addShaderFromSourceFile(QGLShader::Fragment,filterData->getFragmentPath());
+    currentFilter->link();
+    currentFilter->bind();
     updateGL();
+}
+
+void Scene::changeFilter(QString fragmentShaderName){
+    delete currentFilter;
+    currentFilter = new QGLShaderProgram(this->context());
+
+    currentFilter->addShaderFromSourceFile(QGLShader::Vertex,QDir::currentPath() + QDir::separator() + "vertex_shader.txt");
+    currentFilter->addShaderFromSourceFile(QGLShader::Fragment,QDir::currentPath() + QDir::separator() + fragmentShaderName);
+    currentFilter->link();
+    currentFilter->bind();
+    updateGL();
+
 }

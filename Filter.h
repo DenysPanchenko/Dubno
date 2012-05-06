@@ -17,6 +17,8 @@ private:
 public:
     explicit Filter(QWidget *parent = 0);
     Filter(QString filter_name, QString vert_filter, QString frag_filter, QVector<QPair<QString,QPair<double, double> > > ps);
+    QString getVertexPath() {return vert_file;}
+    QString getFragmentPath(){return frag_file;}
 };
 
 #endif // FILTER_H
