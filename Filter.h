@@ -15,10 +15,8 @@
 class Filter : public QWidget{
     Q_OBJECT
 private:
-
     QVBoxLayout* mainLayout;
     QSpacerItem* spacer;
-
     QString filter_name;
     QString vert_file;
     QString frag_file;
@@ -30,6 +28,10 @@ public:
     QString getFragmentPath(){return frag_file;}
     QVector<QPair<QString, double> > getParam() const;
     const QString getFilterName() const;
+signals:
+    void paramsChange(QVector<QPair<QString,double> >);
+private slots:
+    void getChangeSlot();
 };
 
 #endif // FILTER_H

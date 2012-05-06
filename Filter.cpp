@@ -14,6 +14,7 @@ Filter::Filter(QString f_name, QString v_file, QString f_file, QVector<QPair<QSt
         pntr = new QDoubleSpinBox();
         pntr->setMinimum(ps[i].second.first);
         pntr->setMaximum(ps[i].second.second);
+        connect(pntr,SIGNAL(valueChanged(double)),SLOT(getChangeSlot()));
         QPair<QString,QDoubleSpinBox*> p;
         p.first = ps[i].first;
         p.second = pntr;
@@ -26,6 +27,11 @@ Filter::Filter(QString f_name, QString v_file, QString f_file, QVector<QPair<QSt
     }
     mainLayout->addStretch();
     setLayout(mainLayout);
+}
+
+void Filter::getChangeSlot(){
+    QVector<QPair<QString,double> > new_params = getParam();
+    emit paramsChange(new_params);
 }
 
 QVector<QPair<QString, double> > Filter::getParam() const{
