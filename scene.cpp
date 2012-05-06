@@ -94,8 +94,8 @@ void Scene::openImage(){
     if(!imageName.isEmpty()){
         textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
         emit resizeMainWindow(imageName);
-        //updateGL();
-        changeFilter("mosaic.txt");
+        updateGL();
+        //changeFilter("mosaic.txt");
     }
 }
 
