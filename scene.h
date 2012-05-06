@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QString>
 #include <QtDebug>
+#include <QImage>
 #include "FilterFactory.h"
 #include "Filter.h"
 
@@ -27,7 +28,6 @@ signals:
     void resizeMainWindow(QString);
 
 public slots:
-    void changeFilter(QString);
     void changeFilter(int);
     void changeParameters(QVector<QPair<QString,double> >);
 
@@ -41,6 +41,9 @@ private:
     QString imageName;
     GLuint textname;
     QGLShaderProgram* currentFilter;
+    QImage* image;
+    int width;
+    int height;
 
 };
 

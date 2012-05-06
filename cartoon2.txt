@@ -1,0 +1,87 @@
+
+uniform sampler2D quadTexture;
+uniform float width;
+uniform float height;
+varying vec2 vTex;
+
+vec3	rgbToYuv ( const vec3 c )
+{
+	vec3 res;
+	res.x = 0.299*c.r+0.587*c.g+0.114*c.b;
+	res.y = -0.14713*c.r-0.28886*c.g+0.436*c.b;
+	res.z = 0.615*c.r-0.51499*c.g-0.10001*c.b;
+
+	return res;
+}
+
+vec3	yuvToRgb ( const vec3 c )
+{
+	vec3 res;
+	res.r = c.x+1.13983*c.z;
+	res.g = c.x-0.39465*c.y-0.58060*c.z;
+	res.b = c.x + 2.03211*c.y;
+
+	return res;
+}
+
+float avg_intensity(vec4 pix) {
+	vec3 luminace = vec3(0.3,0.59,0.11);
+        return dot(vec3(pix),luminace);
+}
+
+vec4 get_pixel(vec2 coords, float dx, float dy) {
+ return texture2D(quadTexture,coords + vec2(dx, dy));
+}
+
+float IsEdge(vec2 coords){
+  
+  float dxtex = 1.0 /width ;
+  float dytex = 1.0 /height;
+  float pix[9];
+  int k = -1;
+  float delta;
+
+  // read neighboring pixel intensities
+  for (int i=-1; i<2; i++) {
+   for(int j=-1; j<2; j++) {
+    k++;
+    pix[k] = avg_intensity(get_pixel(coords,float(i)*dxtex, float(j)*dytex));
+   }
+  }
+
+  
+  delta = (abs(pix[1]-pix[7])+
+          abs(pix[5]-pix[3]) +
+          abs(pix[0]-pix[8])+
+          abs(pix[2]-pix[6])
+           )/4.;
+
+  return clamp(5.5*delta,0.0,1.0);
+}
+
+vec3 nearestLevel(vec3 col){
+ vec3 res = vec3(1.0);
+ vec3 disc = vec3(6.0,20.0,20.0);
+ vec3 max = vec3(1.0,0.45,0.62);
+ vec3 min = vec3(0.0,-0.45,-0.62);
+ vec3 len;
+ vec3 num;
+ len = (max-min)/disc;
+ num=floor(col/len);
+ res = len*num;
+ return res;
+}
+
+
+void main (void)
+{
+	vec3	color = texture2D ( quadTexture, vTex ).rgb;
+	vec3	yuv   = rgbToYuv  ( color );
+	
+	yuv = nearestLevel(yuv);
+	
+	float edg = IsEdge(vTex);
+        vec4 rgb = vec4(0.0,0.0,0.0,1.0);
+        if(edg< 0.8) rgb = vec4 ( yuvToRgb ( yuv ), 1.0 );
+        gl_FragColor = rgb;
+} 

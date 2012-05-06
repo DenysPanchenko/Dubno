@@ -1,0 +1,143 @@
+//
+// HSV correction image filter fragment shader
+//
+
+uniform sampler2D quadTexture;
+uniform float width;
+uniform float height;
+varying vec2 vTex;
+
+vec3	rgbToHsv ( const vec3 c )
+{
+	float	mn    = min ( min ( c.r, c.g ), c.b );
+	float	mx    = max ( max ( c.r, c.g ), c.b );
+	float	delta = mx - mn;
+	float	h, s, v;
+
+	v = mx;
+
+	if ( mx > 0.001 )
+	{
+		s = delta / mx;
+
+		if ( c.r == mx )
+			h = ( c.g - c.b ) / delta;
+		else
+		if ( c.g == mx )
+			h = 2.0 + ( c.b - c.r ) / delta;
+		else
+			h = 4.0 + ( c.r - c.g ) / delta;
+	}
+	else
+	{
+		s = 0.0;
+		h = 0.0;
+	}
+
+	return vec3 ( h / 6.0, s, v );
+}
+
+vec3	hsvToRgb ( const vec3 c )
+{
+	float	r, b, g;
+	float	h = c.x;
+	float	s = c.y;
+	float	v = c.z;
+	vec3	res;
+
+	if ( s < 0.001 )
+		res = vec3 ( v, v, v );
+	else
+	{
+		h *= 6.0;
+
+		float		fi = floor ( h );
+		int		i  = int ( fi );
+		float	f = h - fi;
+		float	p = v * ( 1.0 - s );
+		float	q = v * ( 1.0 - s * f );
+		float	t = v * ( 1.0 - s * ( 1.0 - f ) );
+
+		if ( i == 0 )
+			res = vec3 ( v, t, p );
+		else
+		if ( i == 1 )
+			res = vec3 ( q, v, p );
+		else
+		if ( i == 2 )
+			res = vec3 ( p, v, t );
+		else
+		if ( i == 3 )
+			res = vec3 ( p, q, v );
+		else
+		if ( i == 4 )
+			res = vec3 ( t, p, v );
+		else
+			res = vec3 ( v, p, q );
+	}
+
+	return res;
+}
+
+
+float avg_intensity(vec4 pix) {
+ return (pix.r + pix.g + pix.b)/3.;
+}
+
+vec4 get_pixel(vec2 coords, float dx, float dy) {
+ return texture2D(quadTexture,coords + vec2(dx, dy));
+}
+
+float IsEdge(in vec2 coords){
+
+  float dxtex = 1.0 /width ;
+  float dytex = 1.0 /height;
+  float pix[9];
+  int k = -1;
+  float delta;
+
+  // read neighboring pixel intensities
+  for (int i=-1; i<2; i++) {
+   for(int j=-1; j<2; j++) {
+    k++;
+    pix[k] = avg_intensity(get_pixel(coords,float(i)*dxtex,
+                                          float(j)*dytex));
+   }
+  }
+
+  
+  delta = (abs(pix[1]-pix[7])+
+          abs(pix[5]-pix[3]) +
+          abs(pix[0]-pix[8])+
+          abs(pix[2]-pix[6])
+           )/4.;
+
+  return clamp(5.5*delta,0.0,1.0);
+}
+
+vec3 nearestLevel(vec3 col){
+ vec3 res = vec3(1.0);
+ vec3 disc = vec3(19.0,7.0,4.0);
+ vec3 max = vec3(1.0,1.0,1.0);
+ vec3 len;
+ vec3 num;
+ len = max/disc;
+ num=floor(col/len);
+ res = len*num;
+ return res;
+}
+
+void main (void)
+{
+	vec3	color = texture2D ( quadTexture, vTex ).rgb;
+	vec3	hsv   = rgbToHsv  ( color );
+
+	hsv *= vec3 ( 1.0, 1.0, 1.0 );
+	
+	hsv = nearestLevel(hsv);
+	
+	float edg = IsEdge(vTex);
+    vec4 rgb = vec4(0.0,0.0,0.0,1.0);
+    if(edg< 0.8) rgb = vec4 ( hsvToRgb ( hsv ), 1.0 );
+    gl_FragColor = rgb;
+}

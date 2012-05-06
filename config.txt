@@ -5,19 +5,23 @@ PARAMS:2;
 Num:1.0:200.0;
 Threshhold:0.0:1.0;
 #
-FILTER_NAME:Distortion;
-VERT_FILE:dsaf;
-FRAG_FILE:dsaf;
-PARAMS:2;
-OPOD:0.0:100;
-LPOK:12.0:13.0;
+FILTER_NAME:Cartoon Effect 1;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:cartoon.txt;
+PARAMS:0;
 #
-FILTER_NAME:Gaussian;
-VERT_FILE:asdfasf;
-FRAG_FILE:fasdfd;
-PARAMS:4;
-OPOP:0.0:21.0;
-UIop:0.0:12.0;
-Ijdk:12.0:13:0;
-PARAM:2.0:32.0;
+FILTER_NAME:Crosshatching Effect;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:crosshatching.txt;
+PARAMS:0;
+#
+FILTER_NAME:Cartoon Effect 2;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:cartoon2.txt;
+PARAMS:0;
+#
+FILTER_NAME:Toon Effect;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:toon1.txt;
+PARAMS:0;
 #
