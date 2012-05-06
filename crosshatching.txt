@@ -1,5 +1,6 @@
 
 uniform sampler2D quadTexture;
+uniform float Levels;
 varying vec2 vTex;
 
 void main(void)
@@ -8,32 +9,32 @@ void main(void)
     float lum_threshold_2 = 0.7;
     float lum_threshold_3=0.5;
     float lum_threshold_4= 0.3;
-    float hatch_y_offset=5.0;
+    float hatch_y_offset=Levels/2.0;
 
     float lum = length(texture2D(quadTexture, vTex).rgb);
     vec3 tc = vec3(1.0, 1.0, 1.0);
 
     if (lum < lum_threshold_1)
     {
-      if (mod(gl_FragCoord.x + gl_FragCoord.y, 10.0) == 0.0)
+      if (mod(gl_FragCoord.x + gl_FragCoord.y, Levels) == 0.0)
         tc = vec3(0.0, 0.0, 0.0);
     }  
 
     if (lum < lum_threshold_2)
     {
-      if (mod(gl_FragCoord.x - gl_FragCoord.y, 10.0) == 0.0)
+      if (mod(gl_FragCoord.x - gl_FragCoord.y, Levels) == 0.0)
         tc = vec3(0.0, 0.0, 0.0);
     }  
 
     if (lum < lum_threshold_3)
     {
-      if (mod(gl_FragCoord.x + gl_FragCoord.y - hatch_y_offset, 10.0) == 0.0)
+      if (mod(gl_FragCoord.x + gl_FragCoord.y - hatch_y_offset, Levels) == 0.0)
         tc = vec3(0.0, 0.0, 0.0);
     }  
 
     if (lum < lum_threshold_4)
     {
-      if (mod(gl_FragCoord.x - gl_FragCoord.y - hatch_y_offset, 10.0) == 0.0)
+      if (mod(gl_FragCoord.x - gl_FragCoord.y - hatch_y_offset, Levels) == 0.0)
         tc = vec3(0.0, 0.0, 0.0);
     }
 

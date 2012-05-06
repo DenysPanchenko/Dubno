@@ -1,8 +1,0 @@
-
-uniform sampler2D quadTexture;
-varying vec2 vTex;
-
-void main(void){
-	//gl_FragColor = texture2D(quadTexture, vTex);
-	gl_FragColor = vec4(1.0,0.0,0.0,0.0);
-}

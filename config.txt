@@ -8,21 +8,34 @@ Threshhold:0.0:1.0;
 FILTER_NAME:Cartoon Effect 1;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:cartoon.txt;
-PARAMS:0;
-#
-FILTER_NAME:Crosshatching Effect;
-VERT_FILE:vertex_shader.txt;
-FRAG_FILE:crosshatching.txt;
-PARAMS:0;
+PARAMS:4;
+DiscretizationH:0.0:38.0;
+DiscretizationS:0.0:14;
+DiscretizationV:0.0:8.0;
+Threshhold:0.0:1.0;
 #
 FILTER_NAME:Cartoon Effect 2;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:cartoon2.txt;
-PARAMS:0;
+PARAMS:3;
+DiscretizationY:0.0:12.0;
+DiscretizationU:0.0:40.0;
+DiscretizationV:0.0:40.0;
+#
+FILTER_NAME:"Crosshatching" Effect;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:crosshatching.txt;
+PARAMS:1;
+Levels:0.0:20.0;
 #
 FILTER_NAME:Toon Effect;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:toon1.txt;
+PARAMS:0;
+#
+FILTER_NAME:Clipping Effect;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:clipping.txt;
 PARAMS:0;
 #
 FILTER_NAME:"Fish Eye" Effect;
@@ -35,11 +48,6 @@ VERT_FILE:vertex_shader.txt;
 FRAG_FILE:distortion1.txt;
 PARAMS:0;
 #
-FILTER_NAME:Clipping;
-VERT_FILE:vertex_shader.txt;
-FRAG_FILE:clipping.txt;
-PARAMS:0;
-#
 FILTER_NAME:Dilate Filter;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:dilate.txt;
@@ -48,20 +56,27 @@ PARAMS:0;
 FILTER_NAME:Emboss Filter;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:emboss.txt;
-PARAMS:0;
+PARAMS:1;
+Level:0.0:0.54;
 #
 FILTER_NAME:Erode Filter;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:erode.txt;
 PARAMS:0;
 #
-FILTER_NAME:Gaussian;
+FILTER_NAME:Gaussian Filter;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:gaussian.txt;
 PARAMS:0;
 #
-FILTER_NAME:Laplacian;
+FILTER_NAME:Laplacian Filter;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:laplacian.txt;
 PARAMS:0;
+#
+FILTER_NAME:"Frosted Glass" Effect;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:frostedglass1.txt;
+PARAMS:1;
+RandomFactor:0.0:1.10;
 #
