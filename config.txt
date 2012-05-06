@@ -60,3 +60,8 @@ VERT_FILE:vertex_shader.txt;
 FRAG_FILE:gaussian.txt;
 PARAMS:0;
 #
+FILTER_NAME:Laplacian;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:laplacian.txt;
+PARAMS:0;
+#
