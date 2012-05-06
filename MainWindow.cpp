@@ -74,6 +74,10 @@ void MainWindow::openImage(){
     QString imageName = QFileDialog::getOpenFileName(this, tr("Open Image"),
                                              "/home",
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
+    QPalette pal = palette();
+    pal.setBrush(QPalette::Window, QBrush(QPixmap(imageName)));
+    dockWidgetPrev->widget()->setPalette(pal);
+    qDebug() << dockWidgetPrev->widget();
     centralWidget->openImage(imageName);
 }
 
