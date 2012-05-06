@@ -5,7 +5,6 @@ Scene::Scene(FilterFactory* ff, QWidget *parent): QGLWidget(parent), factory(ff)
 {
     setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
     currentFilter = new QGLShaderProgram(this->context());
-    curPos = -1;
 }
 
 void Scene::initializeGL()
@@ -95,8 +94,8 @@ void Scene::openImage(){
     if(!imageName.isEmpty()){
         textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
         emit resizeMainWindow(imageName);
-        //updateGL();
-        changeFilter("mosaic.txt");
+        updateGL();
+        //changeFilter("mosaic.txt");
     }
 }
 
