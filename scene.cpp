@@ -5,6 +5,7 @@ Scene::Scene(FilterFactory* ff, QWidget *parent): QGLWidget(parent), factory(ff)
 {
     setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
     currentFilter = new QGLShaderProgram(this->context());
+    image = new QImage();
 }
 
 void Scene::initializeGL()
@@ -93,13 +94,17 @@ void Scene::openImage(){
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
     if(!imageName.isEmpty()){
         textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
+        delete image;
+        image = new QImage(imageName);
+        width = image->width();
+        height = image->height();
         emit resizeMainWindow(imageName);
         updateGL();
-        //changeFilter("mosaic.txt");
     }
 }
 
 void Scene::changeFilter(int pos){
+    if(image->isNull()) return;
     Filter* filterData = factory->getFilter(pos);
 
     delete currentFilter;
@@ -111,41 +116,21 @@ void Scene::changeFilter(int pos){
     currentFilter->bind();
 
     QVector<QPair<QString,double> > params = filterData->getParam();
-    QPair<QString,double> pair;
-
-    for(int i=0;i<params.size();i++){
-        pair = params[i];
-        currentFilter->setUniformValue(pair.first.toStdString().c_str(),(float)pair.second);
-    }
-
-    updateGL();
-}
-
-void Scene::changeFilter(QString fragmentShaderName){
-    delete currentFilter;
-    currentFilter = new QGLShaderProgram(this->context());
-
-    currentFilter->addShaderFromSourceFile(QGLShader::Vertex,QDir::currentPath() + "/vertex_shader.txt");
-    currentFilter->addShaderFromSourceFile(QGLShader::Fragment,QDir::currentPath() + "/" + fragmentShaderName);
-    currentFilter->link();
-    currentFilter->bind();
-
-    currentFilter->setUniformValue("num",(float)50.0);
-    currentFilter->setUniformValue("threshhold",(float)0.15);
-    //currentFilter->setUniformValue("quadTexture",0);
-
-    updateGL();
-
+    changeParameters(params);
 }
 
 void Scene::changeParameters(QVector<QPair<QString, double> > params){
-
+    if(image->isNull()) return;
     QPair<QString,double> pair;
 
     for(int i=0;i<params.size();i++){
         pair = params[i];
         currentFilter->setUniformValue(pair.first.toStdString().c_str(),(float)pair.second);
     }
+
+    currentFilter->setUniformValue("width",(float)width);
+    currentFilter->setUniformValue("height",(float)height);
+
     //currentFilter->bind();
     updateGL();
 }
