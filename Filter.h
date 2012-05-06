@@ -2,17 +2,23 @@
 #define FILTER_H
 
 #include <QWidget>
+#include <QLabel>
 #include <QVector>
 #include <QLayout>
 #include <QDoubleSpinBox>
+#include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QSpacerItem>
 
 #include <QDebug>
 
 class Filter : public QWidget{
     Q_OBJECT
 private:
+
     QVBoxLayout* mainLayout;
+    QSpacerItem* spacer;
+
     QString filter_name;
     QString vert_file;
     QString frag_file;

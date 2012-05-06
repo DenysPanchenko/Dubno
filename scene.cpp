@@ -94,11 +94,7 @@ void Scene::openImage(){
     textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
     emit resizeMainWindow(imageName);
     //updateGL();
-<<<<<<< HEAD
-    changeFilter("distortion1.txt");
-=======
     changeFilter("mosaic.txt");
->>>>>>> 82330afec3a5e92f11ed1b67b031a2c24779d43d
 }
 
 void Scene::changeFilter(int pos){
