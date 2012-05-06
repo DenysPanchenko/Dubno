@@ -14,6 +14,12 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     fileMenu->addAction(closeAction);
 
     editMenu = new QMenu();
+    showPreview = new QAction(this);
+    showPreview->setCheckable(true);
+    showPreview->setChecked(true);
+    showPrefers = new QAction(this);
+    showPrefers->setCheckable(true);
+    showPrefers->setChecked(true);
 
     helpMenu = new QMenu();
     helpMenu->addAction(helpAction);
@@ -35,7 +41,18 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     }
 
     dockWidgetPref = new QDockWidget();
-    dockWidgetPref->setWidget(toolBox);
+    dockWidgetContents = new QWidget();
+    hbLayout = new QHBoxLayout(dockWidgetContents);
+    scrollArea = new QScrollArea(dockWidgetContents);
+    scrollArea->setWidgetResizable(true);
+    scrollAreaWidgetContents = new QWidget();
+    vbLayout = new QVBoxLayout(scrollAreaWidgetContents);
+    horizontalLayout = new QHBoxLayout();
+    horizontalLayout->addWidget(toolBox);
+    vbLayout->addLayout(horizontalLayout);
+    scrollArea->setWidget(scrollAreaWidgetContents);
+    hbLayout->addWidget(scrollArea);
+    dockWidgetPref->setWidget(dockWidgetContents);
 
     imageLabel = new QLabel;
     imageLabel->setBackgroundRole(QPalette::Base);
@@ -63,7 +80,13 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
 void MainWindow::setTitles(){
     fileMenu->setTitle("File");
     editMenu->setTitle("Edit");
+    showPreview->setText("Show preview");
     helpMenu->setTitle("Help");
+}
+
+void MainWindow::previewCheck(bool b){
+    if(b)
+        dockWidgetPrev->setVisible(true);
 }
 
 void MainWindow::resizeMainWindow(QString image){
