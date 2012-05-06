@@ -1,0 +1,20 @@
+uniform sampler2D texture;
+uniform float width;
+uniform float height;
+varying vec2 vTex;
+
+void main(void){
+	vec2 c = 2.0*vTex-vec2(1.0);
+	
+	float r = sqrt(c.x*c.x+c.y*c.y);
+	float a = atan(c.y,c.x);
+
+	r = (2.0/3.14159265)*asin(r);
+	
+	c.x = r*cos(a);
+	c.y = r*sin(a);
+		
+	c = 0.5*(c+vec2(1.0));
+
+	gl_FragColor = texture2D(texture, c);
+}
