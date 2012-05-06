@@ -74,6 +74,7 @@ void MainWindow::openImage(){
     QString imageName = QFileDialog::getOpenFileName(this, tr("Open Image"),
                                              "/home",
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
+    centralWidget->openImage(imageName);
 }
 
 void MainWindow::about(){

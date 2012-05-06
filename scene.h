@@ -15,7 +15,7 @@ class Scene : public QGLWidget
 
 public:
     Scene(FilterFactory* ff, QWidget *parent = 0);
-
+    void openImage(QString fileName);
 protected:
     void initializeGL();
     void resizeGL(int width, int height);
@@ -31,8 +31,6 @@ public slots:
     void changeFilter(int);
     void changeParameters(QVector<QPair<QString,double> >);
 
-private slots :
-    void openImage();
 
 private:
     void draw();
