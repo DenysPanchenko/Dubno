@@ -2,6 +2,7 @@
 
 MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     mainMenu = new QMenuBar();
+    setWindowIcon(QIcon("logo.png"));
 
     fileMenu = new QMenu();
     openImageAction = new QAction(this);
@@ -192,17 +193,9 @@ void MainWindow::openImage(){
 
 void MainWindow::about(){
     QMessageBox::about(this,"About Dubno",
-                       "<table>"
-                       "<tr>"
-                       "<td>"
-                       "<img src=\"logo.png\" WIDTH=\"200\" align=\"left\">"
-                       "</td>"
-                       "<td>"
                        "<h1>Dubno</h1>ver. 1.0.0<br>&copy; 05.2012. All rights reserved.<br><br>"
                        "<font size=\"4\"><i>Authors</i>: Panchenko D., Grytsun V.</font>"
-                       "</td>"
-                       "</tr>"
-                       "</table>");
+                       );
 }
 
 void MainWindow::help(){
