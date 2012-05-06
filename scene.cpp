@@ -89,10 +89,7 @@ void Scene::draw()
 
 }
 
-void Scene::openImage(){
-    imageName = QFileDialog::getOpenFileName(this, tr("Open Image"),
-                                             "/home",
-                                             tr("Images (*.png *.jpeg *.jpg *.gif)"));
+void Scene::openImage(QString imageName){
     if(!imageName.isEmpty()){
         textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
         delete image;
