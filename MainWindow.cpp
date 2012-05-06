@@ -17,9 +17,11 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     showPreview = new QAction(this);
     showPreview->setCheckable(true);
     showPreview->setChecked(true);
+    editMenu->addAction(showPreview);
     showPrefers = new QAction(this);
     showPrefers->setCheckable(true);
     showPrefers->setChecked(true);
+    editMenu->addAction(showPrefers);
 
     helpMenu = new QMenu();
     helpMenu->addAction(helpAction);
@@ -74,12 +76,53 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     connect(aboutAction,SIGNAL(triggered()),this,SLOT(about()));
     connect(closeAction,SIGNAL(triggered()),qApp,SLOT(quit()));
     connect(toolBox,SIGNAL(currentChanged(int)),centralWidget,SLOT(changeFilter(int)));
+    connect(dockWidgetPrev,SIGNAL(visibilityChanged(bool)),SLOT(previewCheck(bool)));
+    connect(dockWidgetPref,SIGNAL(visibilityChanged(bool)),SLOT(preferenceCheck(bool)));
+    connect(showPreview,SIGNAL(triggered()),SLOT(setDockPrevVisible()));
+    connect(showPrefers,SIGNAL(triggered()),SLOT(setDockPrefVisible()));
+}
+
+void MainWindow::setDockPrevVisible(){
+    if(dockWidgetPrev->isVisible()){
+        showPreview->setChecked(false);
+        dockWidgetPrev->hide();
+    }
+    else{
+        showPreview->setChecked(true);
+        dockWidgetPrev->show();
+    }
+}
+
+void MainWindow::setDockPrefVisible(){
+    if(dockWidgetPref->isVisible()){
+        showPrefers->setChecked(false);
+        dockWidgetPref->hide();
+    }
+    else{
+        showPrefers->setChecked(true);
+        dockWidgetPref->show();
+    }
+}
+
+void MainWindow::previewCheck(bool b){
+    if(!b)
+        showPreview->setChecked(false);
+    else
+        showPreview->setChecked(true);
+}
+
+void MainWindow::preferenceCheck(bool b){
+    if(!b)
+        showPrefers->setChecked(false);
+    else
+        showPrefers->setChecked(true);
 }
 
 void MainWindow::setTitles(){
     fileMenu->setTitle("File");
     editMenu->setTitle("Edit");
     showPreview->setText("Show preview");
+    showPrefers->setText("Show filters");
     helpMenu->setTitle("Help");
 }
 
