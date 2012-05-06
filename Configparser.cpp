@@ -48,11 +48,15 @@ int ConfigParser::parse(){
                 }
                 else
                     filterName = token.at(1);
-                //qDebug(filterName.toStdString().c_str());
                 cur = line.at(1);
                 cur.remove("\n");
                 token = cur.split(":");
-                if(token.at(0) != QString("VERT_FILE")){
+                QString r = token.at(0);
+                if(token.at(0).at(0).isSpace())
+                    r = token.at(0).mid(1);
+                if(r != QString("VERT_FILE")){
+                    qDebug(token.at(0).toStdString().c_str());
+                    qDebug(token.at(0).toStdString().c_str());
                     errorLog.append("Parsing error, expected identificator VERT_FILE but get " + token.at(0) + "\n");
                     return -1;
                 }
@@ -62,7 +66,10 @@ int ConfigParser::parse(){
                 cur = line.at(2);
                 cur.remove("\n");
                 token = cur.split(":");
-                if(token.at(0) != QString("FRAG_FILE")){
+                r = token.at(0);
+                if(token.at(0).at(0).isSpace())
+                    r = token.at(0).mid(1);
+                if(r != QString("FRAG_FILE")){
                     errorLog.append("Parsing error, expected identificator FRAG_FILE but get " + token.at(0) + "\n");
                     return -1;
                 }
@@ -72,7 +79,10 @@ int ConfigParser::parse(){
                 cur = line.at(3);
                 cur.remove("\n");
                 token = cur.split(":");
-                if(token.at(0) != QString("PARAMS")){
+                r = token.at(0);
+                if(token.at(0).at(0).isSpace())
+                    r = token.at(0).mid(1);
+                if(r != QString("PARAMS")){
                     errorLog.append("Parsing error, expected identificator PARAMS but get " + token.at(0) + "\n");
                     return -1;
                 }
@@ -85,8 +95,17 @@ int ConfigParser::parse(){
                     token = cur.split(":");
                     QPair<QString,QPair<double,double> > t_p;
                     if(token.size() > 1){
-                        t_p.first = token.at(0);
-                        t_p.second.first = token.at(1).toDouble();
+                        r = token.at(0);
+                        if(token.at(0).at(0).isSpace())
+                            r = token.at(0).mid(1);
+                        t_p.first = r;
+                        r = token.at(1);
+                        if(token.at(1).at(1).isSpace())
+                            r = token.at(1).mid(1);
+                        t_p.second.first = r.toDouble();
+                        r = token.at(2);
+                        if(token.at(2).at(2).isSpace())
+                            r = token.at(2).mid(1);
                         t_p.second.second = token.at(2).toDouble();
                         t_params.append(t_p);
                     }

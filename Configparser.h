@@ -9,6 +9,8 @@
 #include <QString>
 #include <QVector>
 
+#include <QDebug>
+
 class ConfigParser
 {
 private:

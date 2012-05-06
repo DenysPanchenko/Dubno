@@ -1,4 +1,4 @@
-#include <MainWindow.h>
+#include "MainWindow.h"
 
 MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     mainMenu = new QMenuBar();
