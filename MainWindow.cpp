@@ -3,14 +3,11 @@
 MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     mainMenu = new QMenuBar();
 
-    openImageAction = new QAction("Load Image",this);
-    aboutAction = new QAction("About",this);
-    helpAction = new QAction("Help",this);
-    closeAction = new QAction("Close",this);
-
     fileMenu = new QMenu();
+    openImageAction = new QAction(this);
     fileMenu->addAction(openImageAction);
     fileMenu->addSeparator();
+    closeAction = new QAction(this);
     fileMenu->addAction(closeAction);
 
     editMenu = new QMenu();
@@ -24,8 +21,20 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     editMenu->addAction(showPrefers);
 
     helpMenu = new QMenu();
+    language = new QMenu();
+    english = new QAction(this);
+    english->setCheckable(true);
+    english->setChecked(true);
+    language->addAction(english);
+    ukrainian = new QAction(this);
+    ukrainian->setCheckable(true);
+    ukrainian->setChecked(false);
+    language->addAction(ukrainian);
+    helpMenu->addMenu(language);
+    helpAction = new QAction(this);
     helpMenu->addAction(helpAction);
     helpMenu->addSeparator();
+    aboutAction = new QAction(this);
     helpMenu->addAction(aboutAction);
 
     mainMenu->addMenu(fileMenu);
@@ -80,6 +89,21 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     connect(dockWidgetPref,SIGNAL(visibilityChanged(bool)),SLOT(preferenceCheck(bool)));
     connect(showPreview,SIGNAL(triggered()),SLOT(setDockPrevVisible()));
     connect(showPrefers,SIGNAL(triggered()),SLOT(setDockPrefVisible()));
+    connect(ukrainian,SIGNAL(triggered()),SLOT(ukrLang()));
+    connect(english,SIGNAL(triggered()),SLOT(engLang()));
+}
+
+void MainWindow::engLang(){
+    english->setChecked(true);
+    ukrainian->setChecked(false);
+    setTitles("eng");
+}
+
+void MainWindow::ukrLang(){
+    qDebug() << "asdf";
+    ukrainian->setChecked(true);
+    english->setChecked(false);
+    setTitles("ukr");
 }
 
 void MainWindow::setDockPrevVisible(){
@@ -118,12 +142,35 @@ void MainWindow::preferenceCheck(bool b){
         showPrefers->setChecked(true);
 }
 
-void MainWindow::setTitles(){
-    fileMenu->setTitle("File");
-    editMenu->setTitle("Edit");
-    showPreview->setText("Show preview");
-    showPrefers->setText("Show filters");
-    helpMenu->setTitle("Help");
+void MainWindow::setTitles(QString lang){
+    if(lang == QString("eng")){
+        fileMenu->setTitle("File");
+        openImageAction->setText("Open image");
+        closeAction->setText("Close");
+        editMenu->setTitle("Edit");
+        showPreview->setText("Show preview");
+        showPrefers->setText("Show filters");
+        helpMenu->setTitle("Help");
+        language->setTitle("Language");
+        english->setText("English");
+        ukrainian->setText(trUtf8("Українська"));
+        helpAction->setText("Help");
+        aboutAction->setText("About");
+    }
+    else if(lang == "ukr"){
+        fileMenu->setTitle(trUtf8("Файл"));
+        openImageAction->setText(trUtf8("Відкрити зображення"));
+        closeAction->setText(trUtf8("Вихід"));
+        editMenu->setTitle(trUtf8("Правка"));
+        showPreview->setText(trUtf8("Показати початкове зображення"));
+        showPrefers->setText(trUtf8("Показати фільтри"));
+        helpMenu->setTitle(trUtf8("Допомога"));
+        language->setTitle(trUtf8("Мова"));
+        english->setText("English");
+        ukrainian->setText(trUtf8("Українська"));
+        helpAction->setText(trUtf8("Довідка"));
+        aboutAction->setText(trUtf8("Про програму"));
+    }
 }
 
 void MainWindow::resizeMainWindow(QString image){

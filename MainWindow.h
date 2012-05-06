@@ -42,6 +42,9 @@ private:
         QAction* showPreview;
         QAction* showPrefers;
     QMenu* helpMenu;
+        QMenu* language;
+        QAction* english;
+        QAction* ukrainian;
         QAction* helpAction;
         QAction* aboutAction;
 
@@ -56,10 +59,12 @@ private slots:
     void preferenceCheck(bool);
     void setDockPrevVisible();
     void setDockPrefVisible();
+    void engLang();
+    void ukrLang();
 
 public:
     MainWindow(QMainWindow* prnt = 0);
-    void setTitles();
+    void setTitles(QString l);
 };
 
 #endif // MAINWINDOW_H
