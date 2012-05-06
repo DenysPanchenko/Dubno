@@ -1,6 +1,5 @@
 uniform sampler2D quadTexture;
-uniform vec2      tcOffset[25];
-
+uniform float RandomFactor;
 varying vec2 vTex;
 
 
@@ -15,7 +14,7 @@ float rand(vec2 co)
 void main(void)
 {
 
-  float rnd_factor = 0.05;
+  float rnd_factor = RandomFactor/10.0;
 
   vec3 tc = vec3(1.0, 0.0, 0.0);
   vec2 rnd = vec2(rand(vTex.xy),rand(vTex.yx));
