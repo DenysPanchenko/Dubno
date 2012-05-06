@@ -2,6 +2,7 @@
 #define FILTERFACTORY_H
 
 #include <QVector>
+#include <QDir>
 
 #include "Filter.h"
 #include "Configparser.h"
