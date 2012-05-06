@@ -40,6 +40,7 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     setCentralWidget(centralWidget);
 
     connect(openImageAction,SIGNAL(triggered()),centralWidget,SLOT(openImage()));
+    connect(centralWidget,SIGNAL(resizeMainWindow(QString)),this,SLOT(resizeMainWindow(QString)));
 
     setMenuBar(mainMenu);
 }
@@ -48,4 +49,11 @@ void MainWindow::setTitles(){
     fileMenu->setTitle("File");
     editMenu->setTitle("Edit");
     helpMenu->setTitle("Help");
+}
+
+void MainWindow::resizeMainWindow(QString image){
+    QImage* curImage = new QImage(image);
+    QSize size = curImage->size();
+    delete curImage;
+    resize(size.width()+dockWidgetPref->size().width(),size.height());
 }

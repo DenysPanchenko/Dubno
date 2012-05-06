@@ -23,6 +23,9 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mouseDoubleClickEvent(QMouseEvent *event);
 
+signals:
+    void resizeMainWindow(QString);
+
 public slots:
     void changeFilter(QString);
     void changeFilter(int);
