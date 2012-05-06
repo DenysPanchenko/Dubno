@@ -12,7 +12,6 @@ HEADERS += \
     FilterFactory.h \
     Filter.h \
     Configparser.h \
-    glTexture.h \
     scene.h
 
 

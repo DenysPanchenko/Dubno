@@ -35,7 +35,10 @@ private:
     QMenu* editMenu;
     QMenu* helpMenu;
 
-    FilterFactory* filterFactory;
+    FilterFactory* factory;
+private slots:
+    void resizeMainWindow(QString);
+
 public:
     MainWindow(QMainWindow* prnt = 0);
 

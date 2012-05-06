@@ -13,7 +13,7 @@ class Scene : public QGLWidget
     Q_OBJECT
 
 public:
-    Scene(QWidget *parent = 0);
+    Scene(FilterFactory* ff, QWidget *parent = 0);
 
 protected:
     void initializeGL();
@@ -22,6 +22,9 @@ protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseDoubleClickEvent(QMouseEvent *event);
+
+signals:
+    void resizeMainWindow(QString);
 
 public slots:
     void changeFilter(QString);
@@ -33,10 +36,11 @@ private slots :
 private:
     void draw();
 
+    FilterFactory* factory;
     QString imageName;
     GLuint textname;
     QGLShaderProgram* currentFilter;
-    FilterFactory* factory;
+
 };
 
 

@@ -1,11 +1,10 @@
 #include <QtGui>
 #include "scene.h"
 
-Scene::Scene(QWidget *parent): QGLWidget(parent)
+Scene::Scene(FilterFactory* ff, QWidget *parent): QGLWidget(parent), factory(ff)
 {
     setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
     currentFilter = new QGLShaderProgram(this->context());
-    factory = new FilterFactory(QDir::currentPath() + QDir::separator() + "config.txt");
 }
 
 void Scene::initializeGL()
@@ -93,8 +92,13 @@ void Scene::openImage(){
                                              "/home",
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
     textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
+    emit resizeMainWindow(imageName);
     //updateGL();
+<<<<<<< HEAD
     changeFilter("distortion1.txt");
+=======
+    changeFilter("mosaic.txt");
+>>>>>>> 82330afec3a5e92f11ed1b67b031a2c24779d43d
 }
 
 void Scene::changeFilter(int pos){
@@ -118,10 +122,15 @@ void Scene::changeFilter(QString fragmentShaderName){
     delete currentFilter;
     currentFilter = new QGLShaderProgram(this->context());
 
-    currentFilter->addShaderFromSourceFile(QGLShader::Vertex,QDir::currentPath() + QDir::separator() + "vertex_shader.txt");
-    currentFilter->addShaderFromSourceFile(QGLShader::Fragment,QDir::currentPath() + QDir::separator() + fragmentShaderName);
+    currentFilter->addShaderFromSourceFile(QGLShader::Vertex,QDir::currentPath() + "/vertex_shader.txt");
+    currentFilter->addShaderFromSourceFile(QGLShader::Fragment,QDir::currentPath() + "/" + fragmentShaderName);
     currentFilter->link();
     currentFilter->bind();
+
+    currentFilter->setUniformValue("num",50);
+    currentFilter->setUniformValue("threshhold",(float)0.15);
+    //currentFilter->setUniformValue("quadTexture",0);
+
     updateGL();
 
 }
