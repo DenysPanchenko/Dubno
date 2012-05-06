@@ -55,3 +55,8 @@ VERT_FILE:vertex_shader.txt;
 FRAG_FILE:erode.txt;
 PARAMS:0;
 #
+FILTER_NAME:Gaussian;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:gaussian.txt;
+PARAMS:0;
+#
