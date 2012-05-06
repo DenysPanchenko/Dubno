@@ -5,6 +5,8 @@
 #include <QFileDialog>
 #include <QString>
 #include <QtDebug>
+#include "FilterFactory.h"
+#include "Filter.h"
 
 class Scene : public QGLWidget
 {
@@ -21,6 +23,10 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mouseDoubleClickEvent(QMouseEvent *event);
 
+public slots:
+    void changeFilter(QString);
+    void changeFilter(int);
+
 private slots :
     void openImage();
 
@@ -29,9 +35,8 @@ private:
 
     QString imageName;
     GLuint textname;
-    QGLShaderProgram* filter;
-    QGLShader* fragmentShader;
-    QGLShader* vertexShader;
+    QGLShaderProgram* currentFilter;
+    FilterFactory* factory;
 };
 
 
