@@ -40,3 +40,18 @@ VERT_FILE:vertex_shader.txt;
 FRAG_FILE:clipping.txt;
 PARAMS:0;
 #
+FILTER_NAME:Dilate Filter;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:dilate.txt;
+PARAMS:0;
+#
+FILTER_NAME:Emboss Filter;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:emboss.txt;
+PARAMS:0;
+#
+FILTER_NAME:Erode Filter;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:erode.txt;
+PARAMS:0;
+#
