@@ -19,20 +19,12 @@ void FilterFactory::fillFilterPool(){
     else
         return;
     if(!configParser.parse()){
-        qDebug("PIZDA2");
         QList<QString> filterList = configParser.getListOfFilters();
-        int i = 1;
-        qDebug() << filterList;
         foreach(QString f_name, filterList){
-            qDebug(f_name.toStdString().c_str());
             QPair<QString, QString> files = configParser.getVertFragFilesForFilter(f_name);
             QVector<QPair<QString,QPair<double,double> > > params = configParser.getParamsForFilter(f_name);
-
-
             Filter* f = new Filter(f_name,files.first,files.second,params);
-            qDebug() << f;
             filterPool.append(f);
-            qDebug() << filterPool.size();
         }
     }
     else

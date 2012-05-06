@@ -1,6 +1,6 @@
-FILTER_NAME:Garbour;
-VERT_FILE:/home/denis/vert.txt;
-FRAG_FILE:/home/denis/frag.txt;
+FILTER_NAME:Mosaic;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:mosaic.txt;
 PARAMS:5;
 SIGMA:0.0:100.0;
 TETHA:0.0:200.0;

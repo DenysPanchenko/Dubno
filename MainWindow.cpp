@@ -27,11 +27,12 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     factory = new FilterFactory(QDir::currentPath() + "/config.txt");
     factory->fillFilterPool();
 
-
     centralWidget = new Scene(factory);
     toolBox = new QToolBox();
-    for(int i = 0; i < factory->getPoolSize(); i++)
+    for(int i = 0; i < factory->getPoolSize(); i++){
         toolBox->addItem(factory->getFilter(i),factory->getFilter(i)->getFilterName());
+        //connect(factory->getFilter(i),centralWidget,SLOT());
+    }
 
     dockWidgetPref = new QDockWidget();
     dockWidgetPref->setWidget(toolBox);
@@ -53,7 +54,7 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     connect(helpAction,SIGNAL(triggered()),this,SLOT(help()));
     connect(aboutAction,SIGNAL(triggered()),this,SLOT(about()));
     connect(closeAction,SIGNAL(triggered()),qApp,SLOT(quit()));
-
+    connect(toolBox,SIGNAL(currentChanged(int)),centralWidget,SLOT(changeFilter(int)));
 }
 
 void MainWindow::setTitles(){
