@@ -31,7 +31,7 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     toolBox = new QToolBox();
     for(int i = 0; i < factory->getPoolSize(); i++){
         toolBox->addItem(factory->getFilter(i),factory->getFilter(i)->getFilterName());
-        //connect(factory->getFilter(i),SIGNAL(paramsChange(QVector<QPair<QString,double> >)),centralWidget,SLOT);
+        connect(factory->getFilter(i),SIGNAL(paramsChange(QVector<QPair<QString,double> >)),centralWidget,SLOT(changeParameters(QVector<QPair<QString,double> >)));
     }
 
     dockWidgetPref = new QDockWidget();

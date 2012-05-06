@@ -5,7 +5,6 @@ Scene::Scene(FilterFactory* ff, QWidget *parent): QGLWidget(parent), factory(ff)
 {
     setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
     currentFilter = new QGLShaderProgram(this->context());
-    curPos = -1;
 }
 
 void Scene::initializeGL()
@@ -116,6 +115,8 @@ void Scene::changeFilter(int pos){
 
     for(int i=0;i<params.size();i++){
         pair = params[i];
+        qDebug() << pair.first.toStdString().c_str();
+        qDebug() << (float)pair.second;
         currentFilter->setUniformValue(pair.first.toStdString().c_str(),(float)pair.second);
     }
 

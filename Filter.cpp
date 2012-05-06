@@ -40,6 +40,7 @@ QVector<QPair<QString, double> > Filter::getParam() const{
         QPair<QString,double> t;
         t.first = paramsSpinBox[i].first;
         t.second = paramsSpinBox[i].second->value();
+        result.append(t);
     }
     return result;
 }
