@@ -66,7 +66,7 @@ PARAMS:0;
 #
 FILTER_NAME:"Frosted Glass" Effect;
 VERT_FILE:vertex_shader.txt;
-FRAG_FILE:frostedglass1.txt;
+FRAG_FILE:frostedGlass1.txt;
 PARAMS:1;
 RandomFactor:0.0:1.10;
 #
