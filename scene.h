@@ -34,7 +34,9 @@ public slots:
 
 private:
     void draw();
+    void genTexCoordOffsets(GLuint width, GLuint height, GLfloat step = 1.0f);
 
+    GLfloat texCoordOffsets[25*2];
     FilterFactory* factory;
     QString imageName;
     GLuint textname;

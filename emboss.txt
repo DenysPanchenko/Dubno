@@ -1,0 +1,20 @@
+uniform sampler2D quadTexture;
+uniform vec2      tcOffset[25];
+varying vec2 vTex;
+
+void main(void){
+
+	vec4 sample[25];
+ 
+	for (int i = 0; i < 25; i++)
+	{
+		// Sample a grid around and including our texel
+		sample[i] = texture2D(quadTexture, vTex + tcOffset[i]);
+	}
+
+    vec4 res = vec4(2.0)*sample[6]-sample[12]-sample[18]+vec4(0.5);
+
+	vec3 factor = vec3(0.27, 0.67, 0.06);
+	vec3 texel = vec3(dot(factor, vec3(res)));
+    gl_FragColor = vec4(texel, 1.0);
+}

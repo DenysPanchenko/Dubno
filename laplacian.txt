@@ -1,0 +1,43 @@
+uniform sampler2D quadTexture;
+uniform vec2      tcOffset[25]; // Texture coordinate offsets
+ 
+varying vec2 vTex;
+ 
+void main(void)
+{
+	
+ 
+	// Sharpen
+	
+		vec4 sample[25];
+ 
+		for (int i = 0; i < 25; i++)
+		{
+			// Sample a grid around and including our texel
+			sample[i] = texture2D(quadTexture, vTex + tcOffset[i]);
+		}
+ 
+		// Sharpen weighting:
+		// -1 -1 -1 -1 -1
+		// -1 -1 -1 -1 -1
+		// -1 -1 24 -1 -1
+		// -1 -1 -1 -1 -1
+		// -1 -1 -1 -1 -1
+		
+		//0  0  -1   0  0
+		//0 -1  -2  -1  0
+	        //-1 -2  16  -2 -1
+		//0 -1  -2  -1  0
+		//0  0  -1   0  0
+ 
+    		gl_FragColor = 24.0 * sample[12];
+ 
+		for (int i = 0; i < 25; i++)
+		{
+			if (i != 12)
+				gl_FragColor -= sample[i];
+		}
+		//gl_FragColor*=1.0;
+		//gl_FragColor+= texture2D(quadTexture, vTex );
+        //gl_FragColor =  gl_FragColor + texture2D(quadTexture, vTex);
+}

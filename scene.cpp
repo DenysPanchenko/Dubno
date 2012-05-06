@@ -93,6 +93,7 @@ void Scene::openImage(QString imageName){
         image = new QImage(imageName);
         width = image->width();
         height = image->height();
+        genTexCoordOffsets(width,height);
         emit resizeMainWindow(imageName);
         changeFilter(curFilerNum);
     }
@@ -126,7 +127,22 @@ void Scene::changeParameters(QVector<QPair<QString, double> > params){
 
     currentFilter->setUniformValue("width",(float)width);
     currentFilter->setUniformValue("height",(float)height);
+    currentFilter->setUniformValueArray("tcOffset",texCoordOffsets,25,2);
 
     //currentFilter->bind();
     updateGL();
+}
+
+void Scene::genTexCoordOffsets(GLuint width, GLuint height, GLfloat step){
+        float xInc = step / (GLfloat)(width);
+        float yInc = step / (GLfloat)(height);
+
+        for (int i = 0; i < 5; i++)
+        {
+                for (int j = 0; j < 5; j++)
+                {
+                        texCoordOffsets[(((i*5)+j)*2)+0] = (-2.0f * xInc) + ((GLfloat)i * xInc);
+                        texCoordOffsets[(((i*5)+j)*2)+1] = (-2.0f * yInc) + ((GLfloat)j * yInc);
+                }
+        }
 }
