@@ -6,6 +6,7 @@ Scene::Scene(FilterFactory* ff, QWidget *parent): QGLWidget(parent), factory(ff)
     setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
     currentFilter = new QGLShaderProgram(this->context());
     image = new QImage();
+    curFilerNum=0;
 }
 
 void Scene::initializeGL()
@@ -95,11 +96,12 @@ void Scene::openImage(){
         width = image->width();
         height = image->height();
         emit resizeMainWindow(imageName);
-        updateGL();
+        changeFilter(curFilerNum);
     }
 }
 
 void Scene::changeFilter(int pos){
+    curFilerNum=pos;
     if(image->isNull()) return;
     Filter* filterData = factory->getFilter(pos);
 
