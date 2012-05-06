@@ -31,6 +31,7 @@ int ConfigParser::parse(){
         QString text = in.readAll();
         QStringList filterBlock = text.split("#");
         foreach(QString f, filterBlock){
+            if(!f.isEmpty()){
             QString filterName;
             QString vertFile;
             QString fragFile;
@@ -42,7 +43,11 @@ int ConfigParser::parse(){
                 cur = line.at(0);
                 cur.remove("\n");
                 QStringList token = line.at(0).split(":");
-                if(token.at(0) != QString("FILTER_NAME")){
+                QString r = token.at(0);
+                if(token.at(0).at(0).isSpace())
+                    r = token.at(0).mid(1);
+                r.remove("\n");
+                if(r != QString("FILTER_NAME")){
                     errorLog.append("Parsing error, expected identificator FILTER_NAME but get " + token.at(0) + "\n");
                     return -1;
                 }
@@ -51,7 +56,7 @@ int ConfigParser::parse(){
                 cur = line.at(1);
                 cur.remove("\n");
                 token = cur.split(":");
-                QString r = token.at(0);
+                r = token.at(0);
                 if(token.at(0).at(0).isSpace())
                     r = token.at(0).mid(1);
                 if(r != QString("VERT_FILE")){
@@ -121,6 +126,7 @@ int ConfigParser::parse(){
             secondPart.second = t_params;
             params.insert(filterName,secondPart);
         }
+        }
     }
     else{
         errorLog.append("Cannot open config file " + configFileName + "\n");
@@ -130,7 +136,10 @@ int ConfigParser::parse(){
 }
 
 QPair<QString,QString> ConfigParser::getVertFragFilesForFilter(const QString &filterName) const{
-
+    QPair<QString,QString> files;
+    files.first = this->params.value(filterName).first.first;
+    files.second = this->params.value(filterName).first.second;
+    return files;
 }
 
 QString ConfigParser::getErrorLog() const{

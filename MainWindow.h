@@ -35,7 +35,7 @@ private:
     QMenu* editMenu;
     QMenu* helpMenu;
 
-    FilterFactory* filterFactory;
+    FilterFactory* factory;
 public:
     MainWindow(QMainWindow* prnt = 0);
 

@@ -9,12 +9,11 @@
 
 class FilterFactory{
 private:
+    QString configFilePath;
     ConfigParser configParser;
     QVector<Filter*> filterPool;
 public:
-    FilterFactory();
     FilterFactory(const QString& fileName);
-
     int getPoolSize() const;
     Filter* getFilter(int pos) const;
     void fillFilterPool();

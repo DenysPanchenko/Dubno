@@ -18,13 +18,15 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     mainMenu->addMenu(editMenu);
     mainMenu->addMenu(helpMenu);
 
-    centralWidget = new Scene();
+    factory = new FilterFactory(QDir::currentPath() + "/config.txt");
+    factory->fillFilterPool();
 
-    filterFactory = new FilterFactory();
-    filterFactory->fillFilterPool();
 
+    centralWidget = new Scene(factory);
+    qDebug() << "PIZDA";
     toolBox = new QToolBox();
-    toolBox->addItem((QWidget*)filterFactory->getFilter(0),"First");
+    //toolBox->addItem((QWidget*)factory->getFilter(0),"First");
+    //toolBox->addItem((QWidget*)factory->getFilter(1),"Second");
 
     dockWidgetPref = new QDockWidget();
     dockWidgetPref->setWidget(toolBox);

@@ -13,7 +13,7 @@ class Scene : public QGLWidget
     Q_OBJECT
 
 public:
-    Scene(QWidget *parent = 0);
+    Scene(FilterFactory* ff, QWidget *parent = 0);
 
 protected:
     void initializeGL();
@@ -33,10 +33,11 @@ private slots :
 private:
     void draw();
 
+    FilterFactory* factory;
     QString imageName;
     GLuint textname;
     QGLShaderProgram* currentFilter;
-    FilterFactory* factory;
+
 };
 
 

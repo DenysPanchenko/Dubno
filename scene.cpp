@@ -1,11 +1,10 @@
 #include <QtGui>
 #include "scene.h"
 
-Scene::Scene(QWidget *parent): QGLWidget(parent)
+Scene::Scene(FilterFactory* ff, QWidget *parent): QGLWidget(parent), factory(ff)
 {
     setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
     currentFilter = new QGLShaderProgram(this->context());
-    factory = new FilterFactory(QDir::currentPath() + QDir::separator() + "config.txt");
 }
 
 void Scene::initializeGL()

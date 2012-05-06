@@ -8,7 +8,5 @@ int main(int argc, char** argv){
     MainWindow mainWindow;
     mainWindow.setTitles();
     mainWindow.show();
-    FilterFactory ff;
-    ff.fillFilterPool();
     return app.exec();
 }
