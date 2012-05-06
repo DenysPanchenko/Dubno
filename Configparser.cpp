@@ -110,6 +110,10 @@ int ConfigParser::parse(){
     return 0;
 }
 
+QPair<QString,QString> ConfigParser::getVertFragFilesForFilter(const QString &filterName) const{
+
+}
+
 QString ConfigParser::getErrorLog() const{
     return errorLog;
 }

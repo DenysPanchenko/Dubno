@@ -1,11 +1,10 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <QtOpenGL/QGLWidget>
+#include <QtOpenGL>
 #include <QFileDialog>
 #include <QString>
-#include <QImage>
-#include "glTexture.h"
+#include <QtDebug>
 
 class Scene : public QGLWidget
 {
@@ -29,8 +28,10 @@ private:
     void draw();
 
     QString imageName;
-    QImage* image;
-    glTexture* texture;
+    GLuint textname;
+    QGLShaderProgram* filter;
+    QGLShader* fragmentShader;
+    QGLShader* vertexShader;
 };
 
 

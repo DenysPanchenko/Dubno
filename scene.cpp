@@ -4,17 +4,15 @@
 Scene::Scene(QWidget *parent): QGLWidget(parent)
 {
     setFormat(QGLFormat(QGL::DoubleBuffer | QGL::DepthBuffer));
-    image = new QImage();
-    texture = new glTexture();
-
 }
 
 void Scene::initializeGL()
 {
-    glClearColor(1.0,0.0,0.0,0.0);
+    qglClearColor(Qt::white);
     glShadeModel(GL_FLAT);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
+    glEnable(GL_TEXTURE_2D);
 }
 
 void Scene::resizeGL(int width, int height)
@@ -54,27 +52,25 @@ void Scene::draw()
     glLoadIdentity();
     glMatrixMode(GL_MODELVIEW);
 
-    texture->bindTexture();
+    glBindTexture(GL_TEXTURE_2D,textname);
 
-    glEnable(GL_TEXTURE_2D);
     glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex2f(-1.0f, -1.0f);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex2f(1.0f, -1.0f);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex2f(1.0f, 1.0f);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex2f(-1.0f, 1.0f);
-        glEnd();
-    glDisable(GL_TEXTURE_2D);
+        glVertex3f(-1.0f, -1.0f,  0.0f);
+        glTexCoord2f(1.0, 1.0);
+        glVertex3f( 1.0f, -1.0f,  0.0f);
+        glTexCoord2f(1.0, 0.0);
+        glVertex3f( 1.0f,  1.0f,  0.0f);
+        glTexCoord2f(0.0, 0.0);
+        glVertex3f(-1.0f,  1.0f,  0.0f);
+        glTexCoord2f(0.0, 1.0);
+   glEnd();
+
 }
 
 void Scene::openImage(){
     imageName = QFileDialog::getOpenFileName(this, tr("Open Image"),
                                              "/home",
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
-    image->load(imageName);
-    texture->createTexture(image);
+    textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
     updateGL();
 }

@@ -1,4 +1,5 @@
 #include "FilterFactory.h"
+#include <QGLShaderProgram>
 
 FilterFactory::FilterFactory(){
 
@@ -18,9 +19,10 @@ Filter* FilterFactory::getFilter(int pos) const{
 }
 
 void FilterFactory::fillFilterPool(){
-    configParser.setConfigFileName("config");
+    configParser.setConfigFileName("config.txt");
     if(!configParser.parse()){
-        //this->filterPool.append(new Filter(configParser.));
+        //Filter temp_filter = new Filter(configParser.getListOfFilters().first(),configParser.getVertFragFilesForFilter().)
+        //filterPool.append();
     }
     else
         qDebug(configParser.getErrorLog().toStdString().c_str());
