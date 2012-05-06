@@ -102,7 +102,9 @@ void MainWindow::openImage(){
 }
 
 void MainWindow::about(){
-    QMessageBox::about(this,"About ImageProcessing","test");
+    QMessageBox::about(this,"About Dubno","<img src=\"logo.png\"> <h1>Dubno</h1>ver. 1.0.0\n"
+                       "Authors: Panchenko Denys\n"
+                       "Grytsun Vladyslav");
 }
 
 void MainWindow::help(){
