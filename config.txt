@@ -65,3 +65,8 @@ VERT_FILE:vertex_shader.txt;
 FRAG_FILE:laplacian.txt;
 PARAMS:0;
 #
+FILTER_NAME:Frosted Glass;
+VERT_FILE:vertex_shader.txt;
+FRAG_FILE:frostedglass1.txt;
+PARAMS:0;
+#
