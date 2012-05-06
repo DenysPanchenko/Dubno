@@ -49,7 +49,7 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     setMinimumSize(400,300);
     resize(400,300);
 
-    connect(openImageAction,SIGNAL(triggered()),centralWidget,SLOT(openImage()));
+    connect(openImageAction,SIGNAL(triggered()),SLOT(openImage()));
     connect(centralWidget,SIGNAL(resizeMainWindow(QString)),this,SLOT(resizeMainWindow(QString)));
     connect(helpAction,SIGNAL(triggered()),this,SLOT(help()));
     connect(aboutAction,SIGNAL(triggered()),this,SLOT(about()));
@@ -68,6 +68,12 @@ void MainWindow::resizeMainWindow(QString image){
     QSize size = curImage->size();
     delete curImage;
     resize(size.width()+dockWidgetPref->size().width(),size.height());
+}
+
+void MainWindow::openImage(){
+    QString imageName = QFileDialog::getOpenFileName(this, tr("Open Image"),
+                                             "/home",
+                                             tr("Images (*.png *.jpeg *.jpg *.gif)"));
 }
 
 void MainWindow::about(){

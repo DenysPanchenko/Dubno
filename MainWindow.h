@@ -44,6 +44,7 @@ private:
 
 private slots:
     void resizeMainWindow(QString);
+    void openImage();
     void about();
     void help();
 
