@@ -15,3 +15,12 @@ PARAMS:2;
 OPOD:0.0:100;
 LPOK:12.0:13.0;
 #
+FILTER_NAME:Gaussian;
+VERT_FILE:asdfasf;
+FRAG_FILE:fasdfd;
+PARAMS:4;
+OPOP:0.0:21.0;
+UIop:0.0:12.0;
+Ijdk:12.0:13:0;
+PARAM:2.0:32.0;
+#

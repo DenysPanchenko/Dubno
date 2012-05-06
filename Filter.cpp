@@ -18,8 +18,13 @@ Filter::Filter(QString f_name, QString v_file, QString f_file, QVector<QPair<QSt
         p.first = ps[i].first;
         p.second = pntr;
         paramsSpinBox.append(p);
-        mainLayout->addWidget(pntr);
+        QLabel* parLabel = new QLabel(ps[i].first);
+        QHBoxLayout* hb = new QHBoxLayout();
+        hb->addWidget(parLabel);
+        hb->addWidget(pntr);
+        mainLayout->addLayout(hb);
     }
+    mainLayout->addStretch();
     setLayout(mainLayout);
 }
 
@@ -31,4 +36,8 @@ QVector<QPair<QString, double> > Filter::getParam() const{
         t.second = paramsSpinBox[i].second->value();
     }
     return result;
+}
+
+const QString Filter::getFilterName() const{
+   return this->filter_name;
 }
