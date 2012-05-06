@@ -28,16 +28,6 @@ FRAG_FILE:crosshatching.txt;
 PARAMS:1;
 Levels:0.0:20.0;
 #
-FILTER_NAME:Toon Effect;
-VERT_FILE:vertex_shader.txt;
-FRAG_FILE:toon1.txt;
-PARAMS:0;
-#
-FILTER_NAME:Clipping Effect;
-VERT_FILE:vertex_shader.txt;
-FRAG_FILE:clipping.txt;
-PARAMS:0;
-#
 FILTER_NAME:"Fish Eye" Effect;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:distortion.txt;
