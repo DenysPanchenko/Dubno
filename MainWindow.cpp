@@ -37,9 +37,12 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     dockWidgetPref = new QDockWidget();
     dockWidgetPref->setWidget(toolBox);
 
-    widget = new QWidget();
+    imageLabel = new QLabel;
+    imageLabel->setBackgroundRole(QPalette::Base);
+    imageLabel->setFixedSize(180,180);
+    imageLabel->setScaledContents(true);
     dockWidgetPrev = new QDockWidget();
-    dockWidgetPrev->setWidget(widget);
+    dockWidgetPrev->setWidget(imageLabel);
 
     this->addDockWidget(Qt::RightDockWidgetArea,dockWidgetPrev);
     this->addDockWidget(Qt::RightDockWidgetArea,dockWidgetPref);
@@ -74,10 +77,8 @@ void MainWindow::openImage(){
     QString imageName = QFileDialog::getOpenFileName(this, tr("Open Image"),
                                              "/home",
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
-    QPalette pal = palette();
-    pal.setBrush(QPalette::Window, QBrush(QPixmap(imageName)));
-    dockWidgetPrev->widget()->setPalette(pal);
-    qDebug() << dockWidgetPrev->widget();
+    QPixmap image(imageName);
+    imageLabel->setPixmap(image);
     centralWidget->openImage(imageName);
 }
 

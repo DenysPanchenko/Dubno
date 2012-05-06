@@ -28,7 +28,7 @@ private:
     QToolBox* toolBox;
 
     QDockWidget* dockWidgetPrev;
-    QWidget* widget;
+    QLabel* imageLabel;
 
     QMenuBar* mainMenu;
     QMenu* fileMenu;
