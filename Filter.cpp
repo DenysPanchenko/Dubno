@@ -10,6 +10,9 @@ Filter::Filter(QString f_name, QString v_file, QString f_file, QVector<QPair<QSt
     vert_file = v_file;
     frag_file = f_file;
     QDoubleSpinBox* pntr;
+    if(!ps.size()){
+        QLabel* headLabel = new QLabel("No parameters");
+    }
     for(int i = 0; i < ps.size(); i++){
         pntr = new QDoubleSpinBox();
         pntr->setMinimum(ps[i].second.first);
