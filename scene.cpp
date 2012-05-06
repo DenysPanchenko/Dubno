@@ -91,10 +91,12 @@ void Scene::openImage(){
     imageName = QFileDialog::getOpenFileName(this, tr("Open Image"),
                                              "/home",
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
-    textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
-    emit resizeMainWindow(imageName);
-    //updateGL();
-    changeFilter("mosaic.txt");
+    if(!imageName.isEmpty()){
+        textname = bindTexture(imageName,GL_TEXTURE_2D,GL_RGBA);
+        emit resizeMainWindow(imageName);
+        //updateGL();
+        changeFilter("mosaic.txt");
+    }
 }
 
 void Scene::changeFilter(int pos){
@@ -109,7 +111,13 @@ void Scene::changeFilter(int pos){
     currentFilter->link();
     currentFilter->bind();
 
+    QVector<QPair<QString,double> > params = filterData->getParam();
+    QPair<QString,double> pair;
 
+    for(int i=0;i<params.size();i++){
+        pair = params[i];
+        currentFilter->setUniformValue(pair.first.toStdString().c_str(),(float)pair.second);
+    }
 
     updateGL();
 }
@@ -123,7 +131,7 @@ void Scene::changeFilter(QString fragmentShaderName){
     currentFilter->link();
     currentFilter->bind();
 
-    currentFilter->setUniformValue("num",50);
+    currentFilter->setUniformValue("num",(float)50.0);
     currentFilter->setUniformValue("threshhold",(float)0.15);
     //currentFilter->setUniformValue("quadTexture",0);
 

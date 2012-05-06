@@ -37,12 +37,13 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     this->addDockWidget(Qt::RightDockWidgetArea,dockWidgetPrev);
     this->addDockWidget(Qt::RightDockWidgetArea,dockWidgetPref);
 
-    setCentralWidget(centralWidget);
+    setCentralWidget(centralWidget);    
+    setMenuBar(mainMenu);
+    resize(400,300);
 
     connect(openImageAction,SIGNAL(triggered()),centralWidget,SLOT(openImage()));
     connect(centralWidget,SIGNAL(resizeMainWindow(QString)),this,SLOT(resizeMainWindow(QString)));
 
-    setMenuBar(mainMenu);
 }
 
 void MainWindow::setTitles(){
