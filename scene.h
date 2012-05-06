@@ -44,6 +44,7 @@ private:
     QImage* image;
     int width;
     int height;
+    int curFilerNum;
 
 };
 
