@@ -56,7 +56,6 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
 
     imageLabel = new QLabel;
     imageLabel->setBackgroundRole(QPalette::Base);
-    imageLabel->setFixedSize(180,180);
     imageLabel->setScaledContents(true);
     dockWidgetPrev = new QDockWidget();
     dockWidgetPrev->setWidget(imageLabel);
@@ -97,6 +96,8 @@ void MainWindow::openImage(){
                                              tr("Images (*.png *.jpeg *.jpg *.gif)"));
     QPixmap image(imageName);
     imageLabel->setPixmap(image);
+    imageLabel->setFixedWidth(190);
+    imageLabel->setFixedHeight(image.height() * 190 / image.width());
     centralWidget->openImage(imageName);
 }
 

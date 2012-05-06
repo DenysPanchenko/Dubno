@@ -129,7 +129,6 @@ void Scene::changeParameters(QVector<QPair<QString, double> > params){
     currentFilter->setUniformValue("height",(float)height);
     currentFilter->setUniformValueArray("tcOffset",texCoordOffsets,25,2);
 
-    //currentFilter->bind();
     updateGL();
 }
 
