@@ -147,6 +147,6 @@ void Scene::changeParameters(QVector<QPair<QString, double> > params){
         pair = params[i];
         currentFilter->setUniformValue(pair.first.toStdString().c_str(),(float)pair.second);
     }
-
+    //currentFilter->bind();
     updateGL();
 }

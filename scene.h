@@ -29,6 +29,7 @@ signals:
 public slots:
     void changeFilter(QString);
     void changeFilter(int);
+    void changeParameters(QVector<QPair<QString,double> >);
 
 private slots :
     void openImage();
