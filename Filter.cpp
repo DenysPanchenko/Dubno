@@ -14,6 +14,7 @@ Filter::Filter(QString f_name, QString v_file, QString f_file, QVector<QPair<QSt
         pntr = new QDoubleSpinBox();
         pntr->setMinimum(ps[i].second.first);
         pntr->setMaximum(ps[i].second.second);
+        pntr->setSingleStep((pntr->maximum() - pntr->minimum()) / 100.0);
         connect(pntr,SIGNAL(valueChanged(double)),SLOT(getChangeSlot()));
         QPair<QString,QDoubleSpinBox*> p;
         p.first = ps[i].first;

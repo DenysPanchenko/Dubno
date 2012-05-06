@@ -1,12 +1,9 @@
 FILTER_NAME:Mosaic;
 VERT_FILE:vertex_shader.txt;
 FRAG_FILE:mosaic.txt;
-PARAMS:5;
-SIGMA:0.0:100.0;
-TETHA:0.0:200.0;
-LAMBDA:0.0:300.0;
-KFFK:0.0:123.0;
-DFSD:9.9:29.0;
+PARAMS:2;
+Num:1.0:200.0;
+Threshhold:0.0:1.0;
 #
 FILTER_NAME:Distortion;
 VERT_FILE:dsaf;
