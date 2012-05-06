@@ -37,3 +37,7 @@ QVector<QPair<QString, double> > Filter::getParam() const{
     }
     return result;
 }
+
+const QString Filter::getFilterName() const{
+   return this->filter_name;
+}

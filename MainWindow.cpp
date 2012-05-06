@@ -24,8 +24,8 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
 
     centralWidget = new Scene(factory);
     toolBox = new QToolBox();
-    toolBox->addItem((QWidget*)factory->getFilter(0),"First");
-    toolBox->addItem((QWidget*)factory->getFilter(1),"Second");
+    for(int i = 0; i < factory->getPoolSize(); i++)
+        toolBox->addItem(factory->getFilter(i),factory->getFilter(i)->getFilterName());
 
     dockWidgetPref = new QDockWidget();
     dockWidgetPref->setWidget(toolBox);

@@ -29,6 +29,7 @@ public:
     QString getVertexPath() {return vert_file;}
     QString getFragmentPath(){return frag_file;}
     QVector<QPair<QString, double> > getParam() const;
+    const QString getFilterName() const;
 };
 
 #endif // FILTER_H
