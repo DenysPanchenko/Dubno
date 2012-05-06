@@ -100,7 +100,6 @@ void MainWindow::engLang(){
 }
 
 void MainWindow::ukrLang(){
-    qDebug() << "asdf";
     ukrainian->setChecked(true);
     english->setChecked(false);
     setTitles("ukr");
