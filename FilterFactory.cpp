@@ -19,7 +19,7 @@ Filter* FilterFactory::getFilter(int pos) const{
 }
 
 void FilterFactory::fillFilterPool(){
-    configParser.setConfigFileName("config.txt");
+    configParser.setConfigFileName(QDir::currentPath() + QDir::separator() + "config.txt");
     if(!configParser.parse()){
         //Filter temp_filter = new Filter(configParser.getListOfFilters().first(),configParser.getVertFragFilesForFilter().)
         //filterPool.append();

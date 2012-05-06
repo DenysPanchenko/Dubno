@@ -5,7 +5,6 @@ SOURCES += \
     FilterFactory.cpp \
     Filter.cpp \
     Configparser.cpp \
-    glTexture.cpp \
     scene.cpp
 
 HEADERS += \
@@ -15,6 +14,7 @@ HEADERS += \
     Configparser.h \
     glTexture.h \
     scene.h
+
 
 
 
