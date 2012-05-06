@@ -1,11 +1,11 @@
 
 uniform sampler2D quadTexture;
-uniform int num;
+uniform float num;
 uniform float threshhold;
 varying vec2 vTex;
 
 void main(void){
-	float NumTiles = float(num);
+	float NumTiles = num;
 	vec3 EdgeColor = vec3(0.7);
 	float size = 1.0/NumTiles;
 	vec2 sizev = vec2(size);
