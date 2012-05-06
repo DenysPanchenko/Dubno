@@ -4,15 +4,21 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     mainMenu = new QMenuBar();
 
     openImageAction = new QAction("Load Image",this);
-
+    aboutAction = new QAction("About",this);
+    helpAction = new QAction("Help",this);
+    closeAction = new QAction("Close",this);
 
     fileMenu = new QMenu();
-
     fileMenu->addAction(openImageAction);
+    fileMenu->addSeparator();
+    fileMenu->addAction(closeAction);
 
     editMenu = new QMenu();
 
     helpMenu = new QMenu();
+    helpMenu->addAction(helpAction);
+    helpMenu->addSeparator();
+    helpMenu->addAction(aboutAction);
 
     mainMenu->addMenu(fileMenu);
     mainMenu->addMenu(editMenu);
@@ -39,10 +45,14 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
 
     setCentralWidget(centralWidget);    
     setMenuBar(mainMenu);
+    setMinimumSize(400,300);
     resize(400,300);
 
     connect(openImageAction,SIGNAL(triggered()),centralWidget,SLOT(openImage()));
     connect(centralWidget,SIGNAL(resizeMainWindow(QString)),this,SLOT(resizeMainWindow(QString)));
+    connect(helpAction,SIGNAL(triggered()),this,SLOT(help()));
+    connect(aboutAction,SIGNAL(triggered()),this,SLOT(about()));
+    connect(closeAction,SIGNAL(triggered()),qApp,SLOT(quit()));
 
 }
 
@@ -57,4 +67,12 @@ void MainWindow::resizeMainWindow(QString image){
     QSize size = curImage->size();
     delete curImage;
     resize(size.width()+dockWidgetPref->size().width(),size.height());
+}
+
+void MainWindow::about(){
+    QMessageBox::about(this,"About ImageProcessing","test");
+}
+
+void MainWindow::help(){
+
 }
