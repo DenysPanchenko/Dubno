@@ -198,7 +198,7 @@ void MainWindow::openImage(){
 
 void MainWindow::about(){
     QMessageBox::about(this,"About Dubno",
-                       "<h1>Dubno</h1>ver. 1.0.0<br>&copy; 05.2012. All rights reserved.<br><br>"
+                       "<h1>Dubno</h1>GNU General Public License.<br>ver 1.0.0, 05.2012<br><br>"
                        "<font size=\"4\"><i>Authors</i>: Panchenko D., Grytsun V.</font>"
                        );
 }
