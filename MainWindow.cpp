@@ -92,6 +92,11 @@ MainWindow::MainWindow(QMainWindow* prnt) : QMainWindow(prnt){
     connect(showPrefers,SIGNAL(triggered()),SLOT(setDockPrefVisible()));
     connect(ukrainian,SIGNAL(triggered()),SLOT(ukrLang()));
     connect(english,SIGNAL(triggered()),SLOT(engLang()));
+    connect(helpAction,SIGNAL(triggered()),SLOT(showHelp()));
+}
+
+void MainWindow::showHelp(){
+    HelpWidget::showPage("index.html");
 }
 
 void MainWindow::engLang(){

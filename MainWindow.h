@@ -14,6 +14,7 @@
 #include <QtGui/QTableWidget>
 #include <QtOpenGL/QGLWidget>
 
+#include "helpwidget.h"
 #include "FilterFactory.h"
 #include "scene.h"
 
@@ -49,6 +50,7 @@ private:
         QAction* aboutAction;
 
     FilterFactory* factory;
+    HelpWidget* helpWidget;
 
 private slots:
     void resizeMainWindow(QString);
@@ -61,6 +63,7 @@ private slots:
     void setDockPrefVisible();
     void engLang();
     void ukrLang();
+    void showHelp();
 
 public:
     MainWindow(QMainWindow* prnt = 0);
